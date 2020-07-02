@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>reveal.js</title>
+
+        <link rel="stylesheet" href="/node_modules/reveal.js/dist/reset.css">
+        <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css">
+        <link rel="stylesheet" href="/node_modules/reveal.js/dist/theme/white.css" id="theme">
+        <link rel="stylesheet" href="/dist/chat_slide.css">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+
+        <style type="text/css">
+            #chat {
+                width: 30% !important;
+            }
+            dl.vote {
+                display: grid;
+                grid-template-columns: max-content auto;
+            }
+
+            dl.vote dt {
+                font-family: color-emoji, sans-serif;
+                grid-column-start: 1;
+            }
+
+            dl.vote dd {
+                grid-column-start: 2;
+            }
+
+            .vote-results {
+                position: relative;
+            }
+
+            .course-header {
+                position: absolute;
+                max-width: 60%;
+                /*height: 50%;*/
+                bottom: 10%;
+                right: 0;
+                font-size: 0.4em;
+            }
+
+            .course-header h1, .course-header h2 {
+                text-align: right;
+                line-height: 1.35;
+            }
+
+            .course-header h1 span, .course-header h2 span {
+                background: rgba(255, 255, 255, 0.6);
+                color: black;
+                padding: 0px 15px;
+                box-decoration-break: clone;
+                font-family: Montserrat, Helvetica;
+                font-weight: normal;
+                line-height: 1.0;
+                letter-spacing: normal;
+                text-transform: none;
+            }
+        </style>
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="/node_modules/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+
+        <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/dist/chat_slide.js"></script>
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides">
+                <section data-background-image="/courses/s1/bg.jpg">
+                    <div class="r-stretch">
+                        <div class="course-header">
+                            <h1><span>Algorithmique et structures de données</span></h1>
+                            <h1><span>CM3: Les arbres de recherche</span></h1>
+                            <h2><span><b>Guillaume Derval</b>, Pierre Schaus</span></h2>
+                        </div>
+
+                    </div>
+                </section>
+                <section>Slide 2</section>
+                <section>
+                    <h3>It's time to vote</h3>
+                    <p>Quelle est la complexité de Quick-sort?</p>
+                    <dl class="vote">
+                        <dt>0️⃣</dt>
+                        <dd>$\mathcal{O}(n)$</dd>
+                        <dt>1️⃣</dt>
+                        <dd>$\mathcal{O}(n^2)$<br>LOL.</dd>
+                        <dt>2️⃣</dt>
+                        <dd class="fragment highlight-green answer">$\mathcal{O}(n\log n)$</dd>
+                        <dt>3️⃣</dt>
+                        <dd>$\mathcal{O}(\sqrt{n})$</dd>
+                    </dl>
+                    <div class="vote-results">
+                        <canvas id="myChart" style="width: 100% !important; height: auto !important;"></canvas>
+                    </div>
+
+                </section>
+                <section>Next</section>
+            </div>
+        </div>
+        <div id="chat" class="chat-hidden">
+            <div id="reaction-container"></div>
+        </div>
+
+        <script src="/node_modules/reveal.js/dist/reveal.js"></script>
+        <script src="/node_modules/reveal.js/plugin/notes/notes.js"></script>
+        <script src="/node_modules/reveal.js/plugin/markdown/markdown.js"></script>
+        <script src="/node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+        <script>
+            if( window.location.search.match( /(\?|\&)teacher/gi ) === null ) {
+                Array.from(document.getElementsByClassName("answer")).map(x => {
+                    x.classList.remove("fragment");
+                });
+            }
+
+            Reveal.initialize({
+                embedded: true,
+                width: 960,
+                height: 700,
+
+                // Factor of the display size that should remain empty around
+                // the content
+                margin: 0.01,
+
+                // Bounds for smallest/largest possible scale to apply to content
+                minScale: 0.2,
+                maxScale: 2.0,
+
+                hash: true,
+                slideNumber: 'c/t',
+
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+
+                dependencies: [
+                    { src: '/node_modules/reveal.js-math-katex-plugin/math-katex/math-katex.js', async: true }
+                ]
+            });
+
+            if( !/receiver/i.test( window.location.search ) && window.location.search.match( /(\?|\&)teacher/gi ) !== null) {
+                initChatAndVote();
+            }
+        </script>
+    </body>
+</html>

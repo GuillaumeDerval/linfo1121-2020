@@ -1,0 +1,31 @@
+{
+  "name": "linfo1121_2020",
+  "version": "1.0.0",
+  "description": "Slides for the course LINFO1121, along with a nice chat system.",
+  "scripts": {
+    "start": "gulp serve",
+    "prod": "gulp serve-prod",
+    "build": "gulp"
+  },
+  "author": "Guillaume Derval",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "body-parser": "^1.19.0",
+    "connect-redirection": "0.0.1",
+    "cookies": "^0.8.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-connect": "^5.7.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "reveal.js": "^4.0.2",
+    "reveal.js-math-katex-plugin": "github:j13z/reveal.js-math-katex-plugin#0a63dbf174822b2f3f2cd5d3545335319915fae1",
+    "saml2-js": "^2.0.5",
+    "socket.io": "^2.3.0",
+    "uniqid": "^5.2.0",
+    "yargs": "^15.3.1"
+  }
+}

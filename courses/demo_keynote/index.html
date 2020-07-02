@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>Demo keynote</title>
+        <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath/texmath.min.js"></script>
+        <link rel="stylesheet" href="/dist/chat_slide.css">
+        <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/dist/chat_slide.js"></script>
+    </head>
+    <body>
+        <iframe src="/courses/demo_keynote/assets/player/KeynoteDHTMLPlayer.html"></iframe>
+        <div id="chat" class="chat-hidden">
+            <div id="reaction-container"></div>
+        </div>
+        <script>initChatAndVote();</script>
+    </body>
+</html>
